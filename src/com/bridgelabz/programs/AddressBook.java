@@ -20,30 +20,38 @@ public class AddressBook {
 			System.out.println("1.Add new pesron Details");
 			System.out.println("2.edit the details");
 			System.out.println("3.delete the person");
-			System.out.println("4.sortByName");
-			System.out.println("5.sortByZip");
+			System.out.println("4.sortDetails");
+			System.out.println("5.personDetails");
 			int choice = scanner.nextInt();
-			switch (choice) {
+			switch (choice) 
+			{
 			case 1:
 				System.out.println("you are going add new person to Book");
 				Utility.addPerson(file);
 				break;
-			case 2:
+			   case 2:
 				System.out.println("updating the details: ");
 				Utility.editPerson(file);
 				break;
-			/*
-			 * case 3: System.out.println("delete pesron details  from Book");
-			 * utility.deleteObject(filePath); break; case 4:
-			 * System.out.println("sorting by names"); utility.sortByName(filePath); break;
-			 * case 5: System.out.println("sorting by Zip code");
-			 * utility.sortByZip(filePath); break; case 6:
-			 * System.out.println("edit all and print"); break; default:
-			 */
+			
+			  case 3: System.out.println("delete pesron details  from Book");
+			  Utility.deletePerson(file);
+			  break;
+			  case 4:
+			  System.out.println("sorting by names"); 
+			  Utility.sortDetails(file);
+			  break;
+			 case 5: System.out.println("sorting by Zip code");
+			  Utility.personDetails(file);
+			 break; 
+			 case 6:
+			 System.out.println("edit all and print");
+			 break; 
+			 default:
+			 
 
-			// choice=scanner.nextInt();
-			// System.out.println("if you want add more more person the again select the
-			// option");
+			choice=scanner.nextInt();
+			 System.out.println("if you want add more more person the again select the option");
 			}
 
 		} while (ch < 6);
