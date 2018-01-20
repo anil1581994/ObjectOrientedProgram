@@ -36,14 +36,14 @@ public class PlayerObjectDeck {
         }
         System.out.println();
         }
-        String[][] arrayDeck=utility.Sort(arr);
+        String[][] arrayDeck=utility.Sort(arr);//
         
         for(int i=0; i<suit.length; i++)
         {
         System.out.println("Player "+(i+1));
         for(int j=0; j<9; j++)
         {
-        	System.out.println(arrayDeck[i][j]+", ");
+        	System.out.print(deck[i + j * 4] + " (Card " + (i + j * 4) + ")" + " ");
         }
         System.out.println();
         }

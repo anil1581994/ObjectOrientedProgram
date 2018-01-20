@@ -1,5 +1,6 @@
 package com.bridgelabz.utility;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -12,12 +13,252 @@ import java.util.regex.Pattern;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 
 public class Utility {
 
 
-	static Scanner scanner=new Scanner(System.in);
+	static Scanner scanner;
+	JSONArray jsonArray = new JSONArray();
+	JSONObject jsonObject=new JSONObject();
+
+	public Utility() 
+	{
+		scanner = new Scanner(System.in);
+	}
+
+	public static String getString() {
+		return scanner.nextLine();
+	}
+
+	public static int getInteger() {
+		return scanner.nextInt();
+	}
+
+	public double getDouble() {
+		return scanner.nextDouble();
+	}
+
+	public boolean getBoolean() {
+		return scanner.nextBoolean();
+	}
+
+	public float getFloat() {
+		return scanner.nextFloat();
+		
+	}
+
+   //add person
+	@SuppressWarnings({ "unchecked", "rawtypes", "resource" })
+	public static void addPerson(File file)
+	{
+		
+		FileWriter fileWriter=null;
+				
+		scanner=new Scanner(System.in);
+		try {
+		System.out.println("Enter Your First Name: ");
+		String userFirstName=getString();
+		
+		System.out.println("Enter your Last Name: ");
+		String userLastName=getString();
+		
+		System.out.println("Enter your Address: ");
+		String userAddress=getString();
+		
+		System.out.println("Enter your City: ");
+		String userCity=getString();
+		
+		System.out.println("Enter your State: ");
+		String userState=getString();
+		
+		System.out.println("Enter your ZIP: ");
+		int userZIP=getInteger();
+		
+		System.out.println("Enter your Mobile No: ");
+		String userMobileNumber=getString();
+		
+		FileReader fileReader=new FileReader(file);
+		JSONParser parser=new JSONParser();
+		Object jsonArray= parser.parse(fileReader);
+		//JSONArray jsonArray=new JSONArray();
+		JSONObject jsonObject=new JSONObject();
+		jsonObject.put("FirstName",userFirstName);
+		jsonObject.put("LastName", userLastName);
+		jsonObject.put("Address", userAddress);
+		jsonObject.put("City", userCity);
+		jsonObject.put("State", userState);
+		jsonObject.put("Zip", userZIP);
+		jsonObject.put("MobileNumber", userMobileNumber);
+		((java.util.ArrayList) jsonArray).add(jsonObject);
+		try {
+			fileWriter=new FileWriter(file);
+			fileWriter.write(JSONValue.toJSONString(jsonArray));
+			fileWriter.flush();
+			fileWriter.close();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+    }
+		
+	//edit person
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void editPerson(File file) throws FileNotFoundException
+	{
+		FileReader fileReader=null;
+		FileWriter fileWriter=null;
+		System.out.println("Enter what you want edit");
+		try
+		{
+			System.out.println("enter name whoose updation you want");
+			String userEntry=getString();
+			fileReader=new FileReader(file);
+			JSONParser parser=new JSONParser();
+			JSONArray jsonArray=(JSONArray)parser.parse(fileReader);
+			@SuppressWarnings("rawtypes")
+			Iterator iterator=jsonArray.iterator();
+			boolean isExit=false;
+			while(iterator.hasNext())
+			{
+				JSONObject jsonObject=(JSONObject)iterator.next();
+				if(jsonObject.get("FirstName").equals(userEntry))
+				{
+				System.out.println("select option what you want to edit:\n 1.address \n 2.city \n 3.state \n 4.zip \n 5.mobileNumber \n 6.editAll");
+			     int choice=getInteger();
+			     switch(choice)
+			     {
+			     case 1:
+			    	 System.out.println("enter address to update");
+			    	 String userAddress=getString();
+			    	 jsonObject.put("Address", userAddress);
+			    	 break;
+			     case 2:
+			    	 System.out.println("enter city to update");
+			    	 String userCity=getString();
+			    	 jsonObject.put("City",userCity);
+			    	 break;
+			     case 3:
+			    	 System.out.println("enter state to update");
+			    	 String userState=getString();
+			    	 jsonObject.put("State", userState);
+			    	 break;
+			     case 4:
+			    	 System.out.println("enter zip code to update");
+			    	 int  userZip=getInteger();
+			    	 jsonObject.put("Zip",userZip);
+			    	 break;
+			     case 5:
+			    	 System.out.println("enter a mobile Number");
+			    	 String userMobileNumber=getString();
+			    	 jsonObject.put("MobileNumber",userMobileNumber);
+			    	 break;
+			     case 6:
+			    	 System.out.println("enter all details once");
+			    	 System.out.println("enter user1 address");
+			    	 String userAddress1=getString();
+			    	 System.out.println("enter user1 city");
+			    	 String userCity1=getString();
+			    	 System.out.println("enter user1 state");
+			    	 String userState1=getString();
+			    	 System.out.println("enetr user zip1");
+			    	 int userZip1=getInteger();
+			    	 System.out.println("enter mobile number1");
+			    	 String mobileNumber1=getString();
+			    	 jsonObject.put("Address",userAddress1 );
+			    	 jsonObject.put("City",userCity1);
+			    	 jsonObject.put("State",userState1);
+			    	 jsonObject.put("Zip",userZip1);
+			    	 jsonObject.put("MobileNumber",mobileNumber1);
+			    	 break;
+			    	 default:
+			    		 System.out.println("wrong choice please can u enter valid choice");
+			    		
+		            }//sh
+			     ((java.util.ArrayList) jsonArray).add(jsonObject);
+			       FileWriter filewriter=new FileWriter(file);
+			       filewriter.write(JSONValue.toJSONString(jsonArray));
+			       filewriter.flush();
+			       filewriter.close();
+			       System.out.println("Person details has been updated");
+			       isExit=true;
+			       break;
+			}//if
+			
+		}//while
+		   if(isExit==false)
+		   {
+			   System.out.println("person not found in address book");
+		   }
+	  }catch(Exception fe)//trys
+		{
+		  System.out.println("file not found exception");
+		}
+	
+	
+	}//m()
+
+//delete
+	/*
+	* @param file
+	* method delete the person
+	*/
+	@SuppressWarnings("resource")
+	public static void deletePerson(File file) {
+		Scanner scanner=null;
+		FileWriter fileWriter=null;
+		FileReader fileReader=null;
+					
+		scanner=new Scanner(System.in);
+		System.out.println("Enter name you want delete: ");
+		try {
+			    String userEntry=getString();
+				fileReader=new FileReader(file);
+				JSONParser parser=new JSONParser();
+				JSONArray jsonArray=(JSONArray) parser.parse(fileReader);
+				Iterator iterator=jsonArray.iterator();
+				boolean isExist=false;	
+			    while(iterator.hasNext()) {
+							
+					JSONObject jsonObject= (JSONObject) iterator.next();
+							
+					if(jsonObject.get("FirstName").equals(userEntry)) {
+							
+						jsonArray.remove(jsonObject);
+						
+						System.out.println("Deleted successfully: ");
+						isExist=true;
+						break;
+					} 
+					
+				}
+			    
+			    fileWriter=new FileWriter(file);
+				fileWriter.write(JSONValue.toJSONString(jsonArray));
+				fileWriter.flush();
+				fileWriter.close();
+				if(isExist==false) {
+					System.out.println("User does not exist: ");
+				}
+		    } catch ( IOException | org.json.simple.parser.ParseException e) 
+		{
+							
+							e.printStackTrace();
+       }
+		
+	}
+//
+	
+	
+	
+	/*
+	 * @param full_name
+*/
+@SuppressWarnings("unchecked")
 public static void inventoryManager() throws Exception 
 {
 	JSONObject jsonObj_rice=new JSONObject();
@@ -56,7 +297,8 @@ public static void inventoryManager() throws Exception
        // System.out.println(jsonObject);
 
         //Reading the String
-        String item_Name = null ;
+        @SuppressWarnings("unused")
+		String item_Name = null ;
         double amount=0.0 ,totalAmount=0.0;
        // int price_per_kg = 0;
       
@@ -127,63 +369,7 @@ public static String regExpression(String fullName,String mobile_number,String m
 	return message;
 	
 }
-//DeckofCard--9
 
-/*
- * @param suits
- * @param cards
- * @return this method will return the Deck Of Cards as a String array.
- */
-public String[] Deck(String[] suits, String[] ranks)
-{
-	String[] deck = new String[suits.length * ranks.length];
-	
-	for (int i = 0; i < ranks.length; i++) 
-	{
-		for (int j = 0; j < suits.length; j++) 
-		{
-			deck[suits.length*i + j] = ranks[i] + " of " + suits[j];
-		}
-	}
-
-	// shuffle
-	for (int i = 0; i < deck.length; i++) 
-	{
-		int r = i + (int) (Math.random() * (deck.length-i));
-		String temp = deck[r];
-		deck[r] = deck[i];
-		deck[i] = temp;
-	}
-	return deck;
-}
-
-/*
- * @param deck
- * 
- * @description This method will distribute the deck of cards into four player.
- */
-public void distribute(String[] deck)
-{
-	int indexOfDeck=0;
-	String [][] deckOfcard=new String[4][9];
-	for(int i=0; i<4; i++)
-	{
-		for(int j=0; j<9; j++)
-		{
-			deckOfcard[i][j]=deck[indexOfDeck];
-			indexOfDeck++;
-		}
-	}
-	for(int i=0; i<4; i++)
-	{
-		System.out.print("\nPlayer "+(i+1)+" : ");
-		for(int j=0; j<9; j++)
-		{
-			System.out.print(deckOfcard[i][j]+", ");
-		}
-		System.out.print("\n---------------------");
-	}
-}
 //sort 2D array
 
 public static<T extends Comparable> T[][] Sort(T[][] arr) {
@@ -204,4 +390,8 @@ public static<T extends Comparable> T[][] Sort(T[][] arr) {
 return arr;
 
 }
+
+
+
+
 }
