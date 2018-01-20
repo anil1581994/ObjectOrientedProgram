@@ -29,7 +29,7 @@ public class AddressBook {
 				Utility.addPerson(file);
 				break;
 			case 2:
-				System.out.println("updating the details");
+				System.out.println("updating the details: ");
 				Utility.editPerson(file);
 				break;
 			/*
