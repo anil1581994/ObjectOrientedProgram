@@ -9,7 +9,6 @@ public class RegularExpression {
 
 	public static void main(String[] args) 
 	{
-		Utility utility=new Utility();
 		Scanner scanner=new Scanner(System.in);
 		String fullUserName,mobile_Number;
 	
@@ -25,7 +24,7 @@ public class RegularExpression {
 			+ "Please,let us know in case of any clarification Thank you BridgeLabz 01/01/2016.  ";
 	
 	
-	       System.out.println(utility.regExpression(fullUserName,mobile_Number,message));
+	       System.out.println(Utility.regExpression(fullUserName,mobile_Number,message));
 	
 		scanner.close();
 

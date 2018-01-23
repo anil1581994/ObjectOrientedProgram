@@ -12,7 +12,9 @@ public class AddressBook {
 			throws ParseException, org.json.simple.parser.ParseException, FileNotFoundException {
 		File file = new File("/home/bridgeit/Desktop/AnilWorkSpace/ObjectOrientedProgram/src/files/address.json");
 
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
+		@SuppressWarnings("unused")
 		Utility utility = new Utility();
 		int ch = 0;
 		do {
@@ -22,36 +24,37 @@ public class AddressBook {
 			System.out.println("3.delete the person");
 			System.out.println("4.sortDetails");
 			System.out.println("5.personDetails");
+			System.out.println("******************************");
 			int choice = scanner.nextInt();
-			switch (choice) 
-			{
+			switch (choice) {
 			case 1:
 				System.out.println("you are going add new person to Book");
 				Utility.addPerson(file);
 				break;
-			   case 2:
-				System.out.println("updating the details: ");
+			case 2:
+				System.out.println("  you are updating the details: ");
 				Utility.editPerson(file);
 				break;
-			
-			  case 3: System.out.println("delete pesron details  from Book");
-			  Utility.deletePerson(file);
-			  break;
-			  case 4:
-			  System.out.println("sorting by names"); 
-			  Utility.sortDetails(file);
-			  break;
-			 case 5: System.out.println("sorting by Zip code");
-			  Utility.personDetails(file);
-			 break; 
-			 case 6:
-			 System.out.println("edit all and print");
-			 break; 
-			 default:
-			 
 
-			choice=scanner.nextInt();
-			 System.out.println("if you want add more more person the again select the option");
+			case 3:
+				System.out.println(" you are deleting pesron details  from Book");
+				Utility.deletePerson(file);
+				break;
+			case 4:
+				System.out.println(" your sorting the person by there column name");
+				Utility.sortDetails(file);
+				break;
+			case 5:
+				System.out.println("you want to get detail information of person");
+				Utility.personDetails(file);
+				break;
+			   
+			 default:
+
+				System.out.println("if you want add more  person then again select the option");
+				choice = scanner.nextInt();
+				// System.out.println("if you want add more person then again select the
+				// option");
 			}
 
 		} while (ch < 6);

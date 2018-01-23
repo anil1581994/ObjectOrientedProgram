@@ -1,0 +1,17 @@
+[
+	{
+		"amount": 4000,
+		"stockName": "anil",
+		"number_of_Share": 100
+	},
+	{
+		"amount": 1000,
+		"stockName": "vinit",
+		"number_of_Share": 20
+	},
+	{
+		"amount": 5000,
+		"stockName": "dravid",
+		"number_of_Share": 20
+	}
+]

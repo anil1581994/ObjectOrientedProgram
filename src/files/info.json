@@ -1,7 +1,19 @@
-{"Itemlist":
- [
-    { "item_Name":"Rice", "weight":2,"price":50},
-     { "item_Name":"wheat", "weight":1,"price":50},
-      { "item_Name":"pulses", "weight":1,"price":50}
-   
-]}
+{
+	"Itemlist": [
+		{
+			"item_Name": "Rice",
+			"weight": 2,
+			"price": 50
+		},
+		{
+			"item_Name": "wheat",
+			"weight": 1,
+			"price": 50
+		},
+		{
+			"item_Name": "pulses",
+			"weight": 1,
+			"price": 50
+		}
+	]
+}
