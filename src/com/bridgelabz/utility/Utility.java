@@ -20,6 +20,9 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.bridgelabz.programs.LinkedQueue;
+import com.bridgelabz.programs.LinkedStack;
+
 public class Utility {
 
 	static Scanner scanner;
@@ -125,8 +128,7 @@ public class Utility {
 			@SuppressWarnings("rawtypes")
 			Iterator iterator = jsonArray.iterator();
 			boolean isExit = false;// to check availablity op person
-			while (iterator.hasNext()) 
-			{
+			while (iterator.hasNext()) {
 				JSONObject jsonObject = (JSONObject) iterator.next();
 				if (jsonObject.get("FirstName").equals(userEntry)) {
 					// System.out.println("Enter what you want edit");
@@ -134,8 +136,7 @@ public class Utility {
 					System.out.println(
 							"select option what you want to edit:\n 1.address \n 2.city \n 3.state \n 4.zip \n 5.mobileNumber \n 6.editAll");
 					int choice = getInteger();
-					switch (choice) 
-					{
+					switch (choice) {
 					case 1:
 						System.out.println("enter address to update");
 						String userAddress = getString();
@@ -209,8 +210,7 @@ public class Utility {
 
 	// to delete person
 	@SuppressWarnings({ "resource", "rawtypes" })
-	public static void deletePerson(File file)
-	{
+	public static void deletePerson(File file) {
 		@SuppressWarnings("unused")
 		Scanner scanner = null;
 		FileWriter fileWriter = null;
@@ -224,14 +224,12 @@ public class Utility {
 			JSONParser parser = new JSONParser();
 			JSONArray jsonArray = (JSONArray) parser.parse(fileReader);
 			Iterator iterator = jsonArray.iterator();
-			boolean isExist = false;//to user available
-			while (iterator.hasNext())
-           {
+			boolean isExist = false;// to user available
+			while (iterator.hasNext()) {
 
 				JSONObject jsonObject = (JSONObject) iterator.next();
 
-				if (jsonObject.get("FirstName").equals(userEntry))
-				{
+				if (jsonObject.get("FirstName").equals(userEntry)) {
 
 					jsonArray.remove(jsonObject);
 
@@ -260,24 +258,21 @@ public class Utility {
 	// class details
 	//
 	@SuppressWarnings("unchecked")
-	public static void sortDetails(File file)
-	{
+	public static void sortDetails(File file) {
 
-		class SortDetails implements Comparator<Object> 
-		{
+		class SortDetails implements Comparator<Object> {
 			String string = null;
 
-			public SortDetails(String string)
-			{
+			public SortDetails(String string) {
 				this.string = string;
 			}
 
 			@Override
-			public int compare(Object o1, Object o2) //string(fname,lname,zip,add)comp
+			public int compare(Object o1, Object o2) // string(fname,lname,zip,add)comp
 			{
 				JSONObject json1 = (JSONObject) o1;
 				JSONObject json2 = (JSONObject) o2;
-               //return -1 or +1 according to ascii comparison
+				// return -1 or +1 according to ascii comparison
 				return (json1.get(string).toString()).compareTo(json2.get(string).toString());
 			}
 
@@ -297,8 +292,7 @@ public class Utility {
 				System.out.println(
 						"Sort according to \n 1.First Name \n 2.Last Name \n 3. Address \n 4.City \n 5.State \n 6.Zip \n 7.Mobile Number  ");
 				int choice = scanner.nextInt();
-				switch (choice) 
-				{
+				switch (choice) {
 				case 1:
 					System.out.println("Sorting according to First Names: ");
 
@@ -307,8 +301,7 @@ public class Utility {
 					@SuppressWarnings("rawtypes")
 					Iterator nameIterator = jsonArray.iterator();
 
-					while (nameIterator.hasNext()) 
-					{
+					while (nameIterator.hasNext()) {
 						JSONObject json = (JSONObject) nameIterator.next();
 						System.out.println(json.get("FirstName") + "  " + json.get("LastName") + " "
 								+ json.get("Address") + " " + json.get("City") + " " + " " + json.get("State") + " "
@@ -324,8 +317,7 @@ public class Utility {
 					@SuppressWarnings("rawtypes")
 					Iterator lastNameIterator = jsonArray.iterator();
 
-					while (lastNameIterator.hasNext())
-                   {
+					while (lastNameIterator.hasNext()) {
 
 						JSONObject json = (JSONObject) lastNameIterator.next();
 						System.out.println(json.get("FirstName") + "  " + json.get("LastName") + " "
@@ -405,8 +397,7 @@ public class Utility {
 				}
 				System.out.println("you want try again press\"Y\" else press \"N\" ");
 				String ch = scanner.next().toLowerCase();
-				if (ch.equals("y"))
-				{
+				if (ch.equals("y")) {
 					check = true;
 				} else {
 					check = false;
@@ -422,8 +413,7 @@ public class Utility {
 	/*
 	 * @param file method to find the person
 	 */
-	public static void personDetails(File file)
-	{
+	public static void personDetails(File file) {
 
 		FileReader fileReader = null;
 		Scanner scanner = new Scanner(System.in);
@@ -437,15 +427,13 @@ public class Utility {
 			JSONArray jsonArray = (JSONArray) parser.parse(fileReader);
 			Iterator iterator = jsonArray.iterator();
 
-			while (iterator.hasNext()) 
-			{
+			while (iterator.hasNext()) {
 
 				JSONObject jsonObject = (JSONObject) iterator.next();
-				if (jsonObject.get("FirstName").equals(userName)) 
-				{
+				if (jsonObject.get("FirstName").equals(userName)) {
 
 					Iterator iterator1 = jsonObject.keySet().iterator();
-					while (iterator1.hasNext()) //get all key and value pair
+					while (iterator1.hasNext()) // get all key and value pair
 					{
 
 						String jsonKey = (String) iterator1.next();
@@ -454,8 +442,7 @@ public class Utility {
 					}
 				}
 			}
-		} catch (IOException | org.json.simple.parser.ParseException e) 
-		{
+		} catch (IOException | org.json.simple.parser.ParseException e) {
 			e.printStackTrace();
 		}
 	}
@@ -595,6 +582,7 @@ public class Utility {
 	}
 	// clinique util
 
+	@SuppressWarnings("unchecked")
 	public static void addDoctors() {
 		System.out.println("Enter no. of doctors :");
 
@@ -757,15 +745,22 @@ public class Utility {
 			e.printStackTrace();
 		}
 	}
-
+     
 	// commercial data processing
 	@SuppressWarnings("unchecked")
-	public static void createUser() throws Exception {
+	public static void createUser() throws Exception 
+	{
 
 		JSONObject stock_User = new JSONObject();// json object
-		FileReader reader = new FileReader(
-				"/home/bridgeit/Desktop/AnilWorkSpace/ObjectOrientedProgram/src/files/Stock_details.json");
-		String name;
+		FileReader reader=null;
+		try {
+		reader = new FileReader(
+				"/home/bridgeit/Desktop/AnilWorkSpace/ObjectOrientedProgram/src/files/stock.json");
+		}catch(Exception e)
+		{
+			e.printStackTrace(); 
+		}
+		String name,symbol;
 		int number_Of_Share, amount;
 
 		System.out.println("Enter the name of the user......");
@@ -781,10 +776,18 @@ public class Utility {
 		System.out.println("Enter the amount......");
 		amount = scanner.nextInt();
 		stock_User.put("amount", amount);
-
+		
+		System.out.println("Enter the symbol...");
+		symbol=scanner.next();//is
+		stock_User.put("symbol", symbol);
+		
+         System.out.println("....upto here");
+         
 		JSONParser jsonParser = new JSONParser();
 		JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
+		
 		boolean b = true;
+		
 		for (Object o : jsonArray) // json string to java object
 		{
 			JSONObject jsonDeatils = (JSONObject) o;// typecast java obj to JSONObject
@@ -793,26 +796,30 @@ public class Utility {
 			{
 				System.out.println("user Already Exsists.............");
 				b = false;
+				break;
 			}
 		}
 		if (b == true) 
 		{
 			jsonArray.add(stock_User);
 			FileWriter fileWriter = new FileWriter(
-					"/home/bridgeit/Desktop/AnilWorkSpace/ObjectOrientedProgram/src/files/Stock_details1.json");
+					"/home/bridgeit/Desktop/AnilWorkSpace/ObjectOrientedProgram/src/files/stock.json");
 			fileWriter.write(jsonArray.toJSONString());
 			fileWriter.flush();
 			fileWriter.close();
 
 		}
-	}
-
+	}	
+	// if u by a share your sharecount will increase but amount will decrease
+	
 	@SuppressWarnings("unchecked")
-	public static void Buy() throws IOException, ParseException, org.json.simple.parser.ParseException 
+	public static void buy() throws IOException, ParseException, org.json.simple.parser.ParseException 
 	{
-		File file = new File("/home/bridgeit/Desktop/AnilWorkSpace/ObjectOrientedProgram/src/files/Stock_details1.json");
-		File file1 = new File("/home/bridgeit/Desktop/AnilWorkSpace/ObjectOrientedProgram/src/files/stock_symbol.json");
-		if (file.exists() && file1.exists()) {
+		File file = new File(
+				"/home/bridgeit/Desktop/AnilWorkSpace/ObjectOrientedProgram/src/files/stock.json");
+		File file1 = new File("/home/bridgeit/Desktop/AnilWorkSpace/ObjectOrientedProgram/src/files/share.json");
+		if (file.exists() && file1.exists()) 
+		{
 			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(System.in);
 			// reading stock file
@@ -827,114 +834,156 @@ public class Utility {
 
 			System.out.println("Enter the user");
 			String name = scanner.nextLine();
-			Iterator<?> itr = stock.iterator();
-			Iterator<?> itr1 = share.iterator();
-			boolean flag = false;
-			while (itr.hasNext()) {
+			Iterator<?> itr = stock.iterator();//stock_array
+			Iterator<?> itr1 = share.iterator();//share array
+			boolean flag = false;//to ckecl stockuser exist or not
+			while (itr.hasNext()) 
+			{
 				JSONObject obj = (JSONObject) itr.next();
-				if (obj.get("user_Name").equals(name)) {
-					System.out.println("Enter the share sysmbol to buy share:[@,!,#]");// npe
+				if (obj.get("user_Name").equals(name))
+				{
+					System.out.println("Enter the share_symbol to sell a share:[@,!,#]");// npe
 					String sym = scanner.nextLine();
-					/*
-					 * obj.put("Share symbol", sym); if(obj.get("Share Symbol").equals(sym)) {
-					 */
-					while (itr1.hasNext()) {
+				
+					while (itr1.hasNext()) 
+					{
 						JSONObject obj1 = (JSONObject) itr1.next();
-						if (obj1.get("stock_Symbol").equals(sym)) {
-							System.out.println("Enter the amount");
+						if (obj1.get("stock_Symbol").equals(sym))
+						{
+							System.out.println("Enter the amount to puschase share");
 							int amt = scanner.nextInt();
-							int bal = Integer.parseInt(obj.get("amount").toString());
-							int price = Integer.parseInt(obj1.get("amount").toString());
-							int noShare = Integer.parseInt(obj.get("number_Share").toString());
-							int stockShare = Integer.parseInt(obj1.get("Count").toString());
-							int numofshare = amt / price;
-							int newbal = bal - amt;// debit the balance
-							int sharecountcus = noShare + numofshare;// increase the share
-							int sharecountstock = stockShare - numofshare;
-							obj.remove("amount");
-							obj.remove("number_Share");
-							obj1.remove("Count");
+							
+							int bal = Integer.parseInt(obj.get("amount").toString());//stock
+							
+							int price = Integer.parseInt(obj1.get("price").toString());//share price
+							
+							int number_Of_Share = Integer.parseInt(obj.get("number_Of_Share").toString());//stcok
+							
+							int stockShare = Integer.parseInt(obj1.get("count").toString());//share
+							
+							int newshare = amt / price;
+							
+							int newbal = bal - amt;// debit the balance of user
+							int sharecount = number_Of_Share + newshare;// increase the share
+							int stockcount = stockShare - newshare;//substract sold shares how many sold from stock
+							
+							obj.remove("amount");//stock..-
+							obj.remove("number_Of_Share");//stock..+
+							obj1.remove("count");//share..-
+							
+						
 							long millis = System.currentTimeMillis();
 							java.util.Date date = new java.util.Date(millis);
 							System.out.println("Transaction time is : " + date);
+							//queue and stack insertion
+							LinkedQueue queue=new LinkedQueue();
+							queue.insert(date);
+							queue.display();
+						   @SuppressWarnings("rawtypes")
+						      LinkedStack stack=new LinkedStack();
+							      stack.insert(sym);
+							      stack.display();
 							obj.put("amount", newbal);
-							obj.put("number_Share", sharecountcus);
-							obj1.put("Count", sharecountstock);
+							obj.put("number_Of_Share", sharecount);
+							obj1.put("count", stockcount);
 
 							flag = true;
 							break;
 						}
 					}
-					// }
-					/*
-					 * else { obj.put("Share symbol", sym); flag= true; }
-					 */
+				
 				}
 				FileWriter fs = new FileWriter(file);
 				fs.write(JSONValue.toJSONString(stock));
 				fs.flush();
 				fs.close();
 			}
-			if (flag == false) {
+			if (flag == false)
+			{
 				System.out.println("User name not exits");
 			}
 			FileWriter fw = new FileWriter(file1);
 			fw.write(JSONValue.toJSONString(share));
 			fw.flush();
 			fw.close();
-		} else {
+		  } else
+		  {
 			System.out.println("File does not exits");
-		}
+		  }
 	}
-
+  //if you sell shares your amount will credit and your share count will decrease
 	@SuppressWarnings("unchecked")
-	public static void sell() throws Exception {
-		File file = new File("/home/bridgeit/Desktop/AnilWorkSpace/ObjectOrientedProgram/src/files/Stock_details.json");
-		File file1 = new File("/home/bridgeit/Desktop/AnilWorkSpace/ObjectOrientedProgram/src/files/stock_symbol.json");
-		if (file.exists() && file1.exists()) {
+	public static void sell() throws Exception 
+	{
+		File file = new File("/home/bridgeit/Desktop/AnilWorkSpace/ObjectOrientedProgram/src/files/stock.json");
+		File file1 = new File("/home/bridgeit/Desktop/AnilWorkSpace/ObjectOrientedProgram/src/files/share.json");
+		if (file.exists() && file1.exists()) 
+		{
+			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(System.in);
-
+			
+            //stock file
 			FileReader fr = new FileReader(file);
 			JSONParser parser = new JSONParser();
 			JSONArray stock = (JSONArray) parser.parse(fr);
-
+			
+            //share file
 			FileReader sf = new FileReader(file1);
 			JSONParser parser1 = new JSONParser();
 			JSONArray share = (JSONArray) parser1.parse(sf);
-
+            //iterate both json file
 			System.out.println("Enter the user");
 			String name = scanner.nextLine();
 			Iterator<?> itr = stock.iterator();
 			Iterator<?> itr1 = share.iterator();
 			boolean flag = false;
-			while (itr.hasNext()) {
+			
+			while (itr.hasNext()) 
+			{
 				JSONObject obj = (JSONObject) itr.next();
-				if (obj.get("user_Name").equals(name)) {
-					System.out.println("Enter the share sysmbol to buy share:[@,!,#]");
+				if (obj.get("user_Name").equals(name)) 
+				{
+					System.out.println("Enter the which share you want sell:[@,!,#]");
 					String sym = scanner.nextLine();
 
-					while (itr1.hasNext()) {
+					while (itr1.hasNext())
+					{
 						JSONObject obj1 = (JSONObject) itr1.next();
-						if (obj1.get("stock_Symbol").equals(sym)) {
-							System.out.println("Enter the amount");
-							int amt = scanner.nextInt();
-							int bal = Integer.parseInt(obj.get("amount").toString());
-							int price = Integer.parseInt(obj1.get("amount").toString());
-							int noShare = Integer.parseInt(obj.get("number_Share").toString());
-							int stockShare = Integer.parseInt(obj1.get("Count").toString());
-							int numofshare = amt / price;
+						if (obj1.get("stock_Symbol").equals(sym))
+						{
+							System.out.println("Enter how many share you want sell ");
+							int count= scanner.nextInt();
+							
+							int bal = Integer.parseInt(obj.get("amount").toString());//stock
+							
+							int price = Integer.parseInt(obj1.get("price").toString());//share
+							
+							int number_Of_Share = Integer.parseInt(obj.get("number_Of_Share").toString());//stock
+							
+							int amt=price*count;
+							
+							int stockShare = Integer.parseInt(obj1.get("count").toString());//share
+							
+							//updation
 							int newbal = bal + amt;// credit the balance
-							int sharecountcus = noShare - numofshare;// decrease the share count
-							int sharecountstock = stockShare + numofshare;//
+							int sharecount = number_Of_Share-count ;// decrease the share count
+							int stockcount= stockShare+count;
+							
+							//removing old values
+							
 							obj.remove("amount");
-							obj.remove("number_Share");
-							obj1.remove("Count");
+							obj.remove("number_Of_Share");
+							obj1.remove("count");
+							
+							//to print date
 							long millis = System.currentTimeMillis();
 							java.util.Date date = new java.util.Date(millis);
 							System.out.println("Transaction time is" + date);
+							
+							//update new value in respective json
 							obj.put("amount", newbal);
-							obj.put("number_Share", sharecountcus);
-							obj1.put("Count", sharecountstock);
+							obj.put("number_Of_Share", sharecount);
+							obj1.put("count", stockcount);
 
 							flag = true;
 							break;
@@ -946,14 +995,16 @@ public class Utility {
 				fs.flush();
 				fs.close();
 			}
-			if (flag == false) {
+			if (flag == false)
+           {
 				System.out.println("User name not exits");
 			}
 			FileWriter fw = new FileWriter(file1);
 			fw.write(JSONValue.toJSONString(share));
 			fw.flush();
 			fw.close();
-		} else {
+		} else 
+		{
 			System.out.println("File does not exits");
 		}
 
@@ -962,15 +1013,16 @@ public class Utility {
 	public static void display() throws Exception 
 	{
 		FileReader reader1 = new FileReader(
-				"/home/bridgeit/Desktop/AnilWorkSpace/ObjectOrientedProgram/src/files/Stock_details.json");
+				"/home/bridgeit/Desktop/AnilWorkSpace/ObjectOrientedProgram/src/files/stock.json");
 		JSONParser jsonParser1 = new JSONParser();
 		JSONArray jsonArrays_StackDtails = (JSONArray) jsonParser1.parse(reader1);
-		for (Object o1 : jsonArrays_StackDtails) {
+		for (Object o1 : jsonArrays_StackDtails) 
+		{
 			JSONObject jsonDetails2 = (JSONObject) o1;
 			String name = (String) jsonDetails2.get("user_Name");
 			System.out.println("User Name:->" + name);
 
-			Object share = jsonDetails2.get("number_Share");
+			Object share = jsonDetails2.get("number_Of_Share");
 			System.out.println("Number of share->" + share);
 
 			Object amount = jsonDetails2.get("amount");
@@ -979,6 +1031,6 @@ public class Utility {
 			System.out.println("-----------------------------------------");
 		}
 
-	}
+	}		
+}
 
-}//
